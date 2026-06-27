@@ -11,6 +11,7 @@ Welcome to my personal projects repository — a collection of things I've built
 | Project | Description | Tech | Link |
 |---|---|---|---|
 | [Direct Marketing Campaign Optimization] | Project to analyze marketing dataset to build an end-to-end direct marketing targeting campaign workflow | Python, Streamlit | [Project Folder](Direct_Marketing_Campaign_Optimization) |
+| [Email Marketing AB Test] | Project to analyze a randomized retail email experiment and perform A/B Test | Python | [Project Folder](Email_Campaign_AB_Test) |
 
 ## 📫 Get in Touch
 
