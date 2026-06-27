@@ -14,7 +14,6 @@ Welcome to my personal projects repository — a collection of things I've built
 
 ## 📫 Get in Touch
 
-- Email: choi.joshua4453@gmail.com
 - LinkedIn: [linkedin.com/in/joshuachoi-r839](https://www.linkedin.com/in/joshuachoi-r839/)
 
 ---
