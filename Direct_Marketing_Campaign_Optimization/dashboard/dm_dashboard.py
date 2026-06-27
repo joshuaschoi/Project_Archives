@@ -13,7 +13,7 @@ st.set_page_config(
 
 BASE_DIR = Path(__file__).parent
 RAW_DATA_PATHS = [
-    BASE_DIR / "data" / "bank-full.csv"
+    Path.cwd() / "data" / "bank-full.csv"
 ]
 
 
