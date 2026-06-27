@@ -220,6 +220,7 @@ def build_targeting_table(lift_data, contact_cost, value_per_response):
         + (table["share_customers_targeted"] * 100).round(0).astype(int).astype(str)
         + "%"
     )
+    table["targeting_pct"] = (table["share_customers_targeted"] * 100).round(0).astype(int)
     table["customers_targeted"] = table["cumulative_customers"]
     table["responses_captured"] = table["cumulative_responses"]
     table["estimated_contact_cost"] = table["customers_targeted"] * contact_cost
@@ -235,6 +236,7 @@ def build_targeting_table(lift_data, contact_cost, value_per_response):
     return table[
         [
             "targeting_strategy",
+            "targeting_pct",
             "customers_targeted",
             "share_customers_targeted",
             "responses_captured",
@@ -247,7 +249,7 @@ def build_targeting_table(lift_data, contact_cost, value_per_response):
             "roi",
             "cost_per_response",
         ]
-    ]
+    ].sort_values("targeting_pct")
 
 
 def money(value):
@@ -416,12 +418,6 @@ top_30 = targeting_df.loc[targeting_df["targeting_strategy"].eq("Top 30%")].iloc
 best_roi_row = targeting_df.loc[targeting_df["roi"].idxmax()]
 best_profit_row = targeting_df.loc[targeting_df["estimated_net_profit"].idxmax()]
 
-st.sidebar.divider()
-st.sidebar.caption(
-    "Historical campaign KPIs use observed contact attempts. Targeting scenarios "
-    "use one planned contact per selected customer, matching the notebook's final ROI table."
-)
-
 st.subheader("Campaign Baseline")
 baseline_cols = st.columns(5)
 with baseline_cols[0]:
@@ -500,12 +496,14 @@ tab_targeting, tab_segments, tab_notes = st.tabs(
     ["Targeting Tradeoffs", "Segment Review", "Assumptions and Risks"]
 )
 
+targeting_chart_df = targeting_df.sort_values("targeting_pct")
+
 with tab_targeting:
     chart_col_1, chart_col_2 = st.columns(2)
     with chart_col_1:
         st.markdown("#### ROI by Targeting Threshold")
         st.bar_chart(
-            targeting_df[["targeting_strategy", "roi"]].rename(
+            targeting_chart_df[["targeting_strategy", "roi"]].rename(
                 columns={"targeting_strategy": "Threshold", "roi": "ROI Multiple"}
             ),
             x="Threshold",
@@ -519,7 +517,7 @@ with tab_targeting:
     with chart_col_2:
         st.markdown("#### Net Profit by Targeting Threshold")
         st.line_chart(
-            targeting_df[["targeting_strategy", "estimated_net_profit"]].rename(
+            targeting_chart_df[["targeting_strategy", "estimated_net_profit"]].rename(
                 columns={
                     "targeting_strategy": "Threshold",
                     "estimated_net_profit": "Estimated Net Profit",
