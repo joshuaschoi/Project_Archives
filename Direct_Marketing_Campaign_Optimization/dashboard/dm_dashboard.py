@@ -11,11 +11,11 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).resolve().parent
 RAW_DATA_PATHS = [
-    Path.cwd() / "data" / "bank-full.csv"
+    BASE_DIR / "data" / "bank-full.csv",
+    BASE_DIR.parent / "data" / "bank-full.csv"
 ]
-
 
 @st.cache_data
 def load_campaign_data():
