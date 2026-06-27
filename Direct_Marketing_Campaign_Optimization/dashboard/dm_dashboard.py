@@ -25,7 +25,7 @@ def load_campaign_data():
 
     st.error(
         "The dashboard could not find `bank-full.csv`. "
-        "Confirm that the raw data file is included in the deployed Project 1 folder."
+        "Confirm that the raw data file is included in the deployed folder."
     )
     st.stop()
 
@@ -249,7 +249,7 @@ def build_targeting_table(lift_data, contact_cost, value_per_response):
             "roi",
             "cost_per_response",
         ]
-    ]
+    ].sort_values("targeting_pct")
 
 
 def money(value):
@@ -349,10 +349,9 @@ st.title("Direct Marketing Campaign ROI Dashboard")
 st.markdown(
     """
     <div class="note">
-    This dashboard is based on the organized Project 1 notebook. It turns the
-    reduced-feature random forest targeting results into a business-facing
-    planning tool: adjust campaign economics, compare targeting thresholds, and
-    review which customer segments deserve closer attention before launch.
+    This dashboard is based on the outcome of direct marketing campaign optimization project. 
+    It turns the model's targeting results into a business-facing planning tool: adjust campaign economics, compare targeting thresholds, and
+    review which customer segments deserve closer attention before campaign launch.
     </div>
     """,
     unsafe_allow_html=True,
@@ -484,6 +483,8 @@ with scenario_cols[4]:
         f"{money_two(selected_row['cost_per_response'])} cost per response",
     )
 
+st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
+
 st.info(
     f"The notebook's practical recommendation is **Top 20% to Top 30%**. "
     f"At the current assumptions, Top 20% captures {percent(top_20['share_responses_captured'])} "
@@ -501,14 +502,13 @@ with tab_targeting:
     with chart_col_1:
         st.markdown("#### ROI by Targeting Threshold")
         st.bar_chart(
-            targeting_df[["targeting_strategy", "roi"]].rename(
-                columns={"targeting_strategy": "Threshold", "roi": "ROI Multiple"}
+            targeting_df[["targeting_pct", "roi"]].rename(
+                columns={"targeting_pct": "Threshold %", "roi": "ROI Multiple"}
             ),
-            x="Threshold",
+            x="Threshold %",
             y="ROI Multiple",
             height=320,
-            color="#2563EB",
-            sort="targeting_pct"
+            color="#2563EB"
         )
         st.caption(
             f"Highest ROI: {best_roi_row['targeting_strategy']} at {multiple(best_roi_row['roi'])}."
@@ -516,17 +516,16 @@ with tab_targeting:
     with chart_col_2:
         st.markdown("#### Net Profit by Targeting Threshold")
         st.line_chart(
-            targeting_df[["targeting_strategy", "estimated_net_profit"]].rename(
+            targeting_df[["targeting_pct", "estimated_net_profit"]].rename(
                 columns={
-                    "targeting_strategy": "Threshold",
+                    "targeting_pct": "Threshold %",
                     "estimated_net_profit": "Estimated Net Profit",
                 }
             ),
-            x="Threshold",
+            x="Threshold %",
             y="Estimated Net Profit",
             height=320,
-            color="#059669",
-            sort="targeting_pct"
+            color="#059669"
         )
         st.caption(
             f"Highest modeled net profit: {best_profit_row['targeting_strategy']} at {money(best_profit_row['estimated_net_profit'])}."
@@ -545,7 +544,7 @@ with tab_targeting:
             color="#7C3AED",
         )
         st.caption(
-            "Tile 1 contains the highest predicted response probabilities. The notebook's selected model reaches 50.1% response rate in this tile."
+            "Tile 1 contains the highest predicted response probabilities. The current model reaches 50.1% response rate in this tile."
         )
     with lift_col_2:
         st.markdown("#### Response Capture Curve")
@@ -568,7 +567,7 @@ with tab_targeting:
             color=["#DC2626", "#9CA3AF"],
         )
         st.caption(
-            "The model captures responders faster than random outreach, especially in the top 10-30% of customers."
+            "The current model captures responders faster than random outreach, especially in the top 10-30% of customers."
         )
 
     threshold_table = targeting_df[
@@ -649,18 +648,15 @@ with tab_segments:
         }
     )
     st.table(format_table(segment_table))
-    st.caption(
-        "Segment metrics are descriptive, not causal. They help identify where the business should investigate targeting, timing, and contact strategy."
-    )
 
 with tab_notes:
     st.markdown("#### How to Read This Dashboard")
     st.markdown(
         """
-        - The baseline campaign KPIs are rebuilt from the organized notebook's raw
+        - The baseline campaign KPIs are modeled from the raw
           UCI Bank Marketing file.
         - The targeting threshold table uses the reduced-feature random forest
-          lift results reported in the notebook.
+          lift results modeled in the notebook.
         - `duration` is intentionally excluded from the modeling story because it
           is only known after a customer has already been contacted.
         - ROI assumptions are synthetic. They make the business tradeoff visible,
@@ -668,17 +664,15 @@ with tab_notes:
         """
     )
 
-    st.markdown("#### Notebook-Aligned Decision Rules")
+    st.markdown("#### Model-Recommended Decision Rules")
     st.markdown(
         """
         - **Maximize ROI:** choose Top 10%.
         - **Balance scale and efficiency:** choose Top 20% to Top 30%.
         - **Maximize modeled net profit under the synthetic assumptions:** Top 100%.
-        - **Production next step:** validate the strategy in a future randomized campaign
-          and monitor customer fatigue, opt-outs, complaints, and long-term value.
         """
     )
 
 st.caption(
-    "Source: Project 1 organized notebook, UCI Bank Marketing dataset, and reduced-feature random forest lift results."
+    "Source: UCI Bank Marketing dataset"
 )
