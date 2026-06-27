@@ -12,8 +12,8 @@ st.set_page_config(
 )
 
 BASE_DIR = Path(__file__).parent
-THRESHOLD_PATH = BASE_DIR / "data" / "processed" / "project1_targeting_threshold_table.csv"
-LIFT_PATH = BASE_DIR / "data" / "processed" / "project1_final_lift_table.csv"
+THRESHOLD_PATH = BASE_DIR / "data" / "targeting_threshold_table.csv"
+LIFT_PATH = BASE_DIR / "data" / "final_lift_table.csv"
 
 
 @st.cache_data
