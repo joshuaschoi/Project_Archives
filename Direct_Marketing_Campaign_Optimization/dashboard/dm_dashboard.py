@@ -249,7 +249,7 @@ def build_targeting_table(lift_data, contact_cost, value_per_response):
             "roi",
             "cost_per_response",
         ]
-    ].sort_values("targeting_pct")
+    ]
 
 
 def money(value):
@@ -496,20 +496,19 @@ tab_targeting, tab_segments, tab_notes = st.tabs(
     ["Targeting Tradeoffs", "Segment Review", "Assumptions and Risks"]
 )
 
-targeting_chart_df = targeting_df.sort_values("targeting_pct")
-
 with tab_targeting:
     chart_col_1, chart_col_2 = st.columns(2)
     with chart_col_1:
         st.markdown("#### ROI by Targeting Threshold")
         st.bar_chart(
-            targeting_chart_df[["targeting_strategy", "roi"]].rename(
+            targeting_df[["targeting_strategy", "roi"]].rename(
                 columns={"targeting_strategy": "Threshold", "roi": "ROI Multiple"}
             ),
             x="Threshold",
             y="ROI Multiple",
             height=320,
             color="#2563EB",
+            sort="targeting_pct"
         )
         st.caption(
             f"Highest ROI: {best_roi_row['targeting_strategy']} at {multiple(best_roi_row['roi'])}."
@@ -517,7 +516,7 @@ with tab_targeting:
     with chart_col_2:
         st.markdown("#### Net Profit by Targeting Threshold")
         st.line_chart(
-            targeting_chart_df[["targeting_strategy", "estimated_net_profit"]].rename(
+            targeting_df[["targeting_strategy", "estimated_net_profit"]].rename(
                 columns={
                     "targeting_strategy": "Threshold",
                     "estimated_net_profit": "Estimated Net Profit",
@@ -527,6 +526,7 @@ with tab_targeting:
             y="Estimated Net Profit",
             height=320,
             color="#059669",
+            sort="targeting_pct"
         )
         st.caption(
             f"Highest modeled net profit: {best_profit_row['targeting_strategy']} at {money(best_profit_row['estimated_net_profit'])}."
