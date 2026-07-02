@@ -9,10 +9,10 @@ Welcome to my personal projects repository — a collection of things I've built
 ## 📂 Projects
 
 | Project | Description | Link |
-|---|---|---|---|
+|---|---|---|
 | [Direct Marketing Campaign Optimization] | Project to analyze marketing dataset to build an end-to-end direct marketing targeting campaign workflow | [Project Folder](Direct_Marketing_Campaign_Optimization) / [Dashboard](https://projectarchives-eqphssa3amgaktmwchckhp.streamlit.app/) |
 | [Email Marketing AB Test] | Project to analyze a randomized retail email experiment and perform A/B Test | [Project Folder](Email_Campaign_AB_Test) |
-| [Entry Level Job Search] | Project to identify entry-level job postings that are more like mid-senior level roles | [Project Folder](Entry_Level_Job_Search) |
+| [Entry Level Job Search] | Project to identify entry-level job postings that are more like mid-senior level roles | [Project Folder](Entry_Level_Job_Search) / [Dashboard](https://projectarchives-4o6cuugnnfolvwaroggenc.streamlit.app/) |
 
 ## 📫 Get in Touch
 
