@@ -4,7 +4,7 @@ Welcome to my personal projects repository — a collection of things I've built
 
 ## 🧰 Tech Skills
 
-`SQL` · `Python` · `SSRS` · `Snowflake` · `AWS`
+`SQL` · `Python`
 
 ## 📂 Projects
 

@@ -28,6 +28,9 @@ The model and dashboard are evaluated using these key outputs:
 - `requirements.txt`: Minimal dependencies required to deploy the Streamlit dashboard.
 - `requirements_notebook.txt`: Full notebook/training environment dependencies.
 
+    // Due to a large size of the original files, please find the original link above for raw dataset downloads. <br>
+    // In this project folder, only the reduced dataset made for dahsboard is included, and this is not to be used for notebook processing.
+
 ## Features
 
 - `title`: Job posting title.
