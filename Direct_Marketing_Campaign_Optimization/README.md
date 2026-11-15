@@ -16,9 +16,24 @@ The campaign strategy is evaluated on these key metrics:
 - Cumulative lift
 - Response capture by targeting threshold
 
+## Key Results
+
+- The dataset has 45,211 customer contact records with an 11.7% response rate.
+- Three models were compared on a held-out test set: logistic regression (baseline), random forest, and a reduced-feature random forest. The reduced-feature random forest was selected (ROC AUC 0.798, PR AUC 0.439).
+- The top score decile responds at 50.1%, a 4.28x lift over the test-set average.
+- The top 10% of scored customers captures 42.8% of responders, the top 20% captures 60.7%, and the top 30% captures 70.2%.
+- Recommendation: target the top 20% to 30% of scored customers, or the top 10% when budget or capacity is tight.
+- `duration` was excluded from modeling to prevent target leakage, because call length is only known after a customer is contacted.
+
+ROI and profit figures in the notebook and dashboard use synthetic assumptions ($2 per contact attempt, $100 profit per response), not actual bank financials.
+
 ## File Description
 
+- `project_notebook_dm_campaign_optimization.ipynb`: Main notebook covering data quality checks, feature engineering, EDA, modeling, lift analysis, and ROI by targeting threshold.
 - `data/bank-full.csv`: Raw UCI Bank Marketing dataset used as the source data.
+- `dashboard/dm_dashboard.py`: Streamlit dashboard for comparing ROI across targeting thresholds.
+- `dashboard/final_lift_table.csv`, `dashboard/targeting_threshold_table.csv`: Reference copies of the selected model's lift and targeting threshold tables.
+- `requirements.txt`: Dependencies for the notebook. `dashboard/requirements.txt` covers the dashboard only.
 
 ## Features
 
@@ -52,9 +67,9 @@ This project requires Python 3.x and the libraries listed in `requirements.txt`,
 
 ## Interactive Dashboard
 
-This project includes a Streamlit dashboard that lets users adjust campaign assumptions and compare expected ROI across targeting thresholds.
+This project includes a [Streamlit dashboard](https://projectarchives-eqphssa3amgaktmwchckhp.streamlit.app/) that lets users adjust campaign assumptions and compare expected ROI across targeting thresholds.
 
-The dashboard uses the Project 1 model output tables and recalculates financial metrics based on:
+The dashboard uses the selected model's lift results and recalculates financial metrics based on:
 
 - Cost per contacted customer
 - Value per successful response

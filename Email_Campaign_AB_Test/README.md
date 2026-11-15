@@ -21,9 +21,20 @@ Supporting metrics include:
 - Spend per buyer
 - Incremental spend per customer
 
+## Key Results
+
+- 64,000 customers were split evenly across three groups, and pre-campaign attributes were balanced across them.
+- Spend per customer was $1.42 for the Mens email and $1.08 for the Womens email, versus $0.65 with no email.
+- Incremental spend per customer versus control: $0.77 for the Mens email (95% bootstrap CI $0.48 to $1.05) and $0.42 for the Womens email ($0.17 to $0.69). Both are significant under a one-sided Welch's t-test.
+- The Mens email raised visit rate from 10.62% to 18.28% and conversion rate from 0.57% to 1.25%.
+- Spend per buyer showed no quality drop ($114 control, $114 Mens, $122 Womens), so the lift came from more visits and purchases, not lower-value orders.
+- Recommendation: use the Mens email as the benchmark creative for a follow-up test of personalized product-category messaging.
+
 ## File Description
 
-- `data/project2_hillstrom/hillstrom_email_marketing.csv`: Raw MineThatData email experiment dataset.
+- `project_notebook_Email_Campaign_AB_Test.ipynb`: Main notebook covering experiment setup, data checks, primary metric testing, guardrail and tracking metrics, and the recommendation.
+- `data/hillstrom_email_marketing.csv`: Raw MineThatData email experiment dataset.
+- `requirements.txt`: Dependencies for the notebook.
 
 ## Install
 
