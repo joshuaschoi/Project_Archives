@@ -32,7 +32,7 @@ ROI and profit figures in the notebook and dashboard use synthetic assumptions (
 - `project_notebook_dm_campaign_optimization.ipynb`: Main notebook covering data quality checks, feature engineering, EDA, modeling, lift analysis, and ROI by targeting threshold.
 - `data/bank-full.csv`: Raw UCI Bank Marketing dataset used as the source data.
 - `dashboard/dm_dashboard.py`: Streamlit dashboard for comparing ROI across targeting thresholds.
-- `dashboard/final_lift_table.csv`, `dashboard/targeting_threshold_table.csv`: Model output tables from the notebook, used by the dashboard.
+- `dashboard/final_lift_table.csv`, `dashboard/targeting_threshold_table.csv`: Reference copies of the selected model's lift and targeting threshold tables.
 - `requirements.txt`: Dependencies for the notebook. `dashboard/requirements.txt` covers the dashboard only.
 
 ## Features
@@ -69,7 +69,7 @@ This project requires Python 3.x and the libraries listed in `requirements.txt`,
 
 This project includes a [Streamlit dashboard](https://projectarchives-eqphssa3amgaktmwchckhp.streamlit.app/) that lets users adjust campaign assumptions and compare expected ROI across targeting thresholds.
 
-The dashboard uses the notebook's model output tables and recalculates financial metrics based on:
+The dashboard uses the selected model's lift results and recalculates financial metrics based on:
 
 - Cost per contacted customer
 - Value per successful response

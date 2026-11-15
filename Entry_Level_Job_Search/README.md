@@ -21,7 +21,7 @@ The model and dashboard are evaluated using these key outputs:
 ## Key Results
 
 - A DuckDB SQL script joins the raw posting, skill, industry, salary, benefit, and company files into one table of 123,849 postings.
-- Among the 36,708 postings labeled `Entry level`, 30.9% mention 3+ years of experience, 22.6% mention 5+ years, and 37.4% show at least two warning signals.
+- Among the 36,576 `Entry level` postings with at least 30 description words, 30.9% mention 3+ years of experience, 22.6% mention 5+ years, and 37.4% show at least two warning signals.
 - Three models were compared on the same held-out test set: TF-IDF + logistic regression, TF-IDF + calibrated LinearSVC, and a basic TensorFlow text-plus-tabular model.
 - The calibrated LinearSVC was selected, with 0.795 entry-level F1, 0.712 weighted F1, and 0.589 macro F1. The TensorFlow model was the weakest (0.220 macro F1).
 - The dashboard ranks all 36,708 entry-level-labeled postings by the model's true entry-level score.
@@ -33,7 +33,7 @@ The model and dashboard are evaluated using these key outputs:
 - `data/streamlit/app_dataset.csv`: Reduced dashboard-ready dataset used by the Streamlit app.
 - `models/final_model.pkl`: Saved final calibrated LinearSVC model from the notebook.
 - `sql/build_final_table.sql`: SQL script used to join and prepare the original raw LinkedIn job posting data.
-- `requirements.txt`: Minimal dependencies required to deploy the Streamlit dashboard.
+- `requirements.txt`, `requirements_streamlit.txt`: Minimal dependencies required to deploy the Streamlit dashboard.
 - `requirements_notebook.txt`: Full notebook/training environment dependencies.
 
 > The original raw files are too large to include here; download them from the dataset link above. This folder only includes the reduced dataset built for the dashboard, which is not meant for notebook processing.
